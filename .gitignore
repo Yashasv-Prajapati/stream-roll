@@ -2,3 +2,6 @@
 .env*.local
 .env*.development
 .env*.production
+
+# db
+dev.*
