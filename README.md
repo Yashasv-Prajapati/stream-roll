@@ -3,7 +3,8 @@
 A simple platform for uploading videos and sharing with the world. Utilizes HLS streaming for video playback for seamless experience and supports multiple video qualities for better user experience.
 
 ## Design and Architecture
-![streamroll-aws-architecture-transparent](https://github.com/user-attachments/assets/1b4ba7a0-7ce3-4223-953a-8cf57d4cde3d)
+![adaptive-video-streaming](https://github.com/user-attachments/assets/826912cd-26f5-49e9-80ee-10c52455c23c)
+
 
 ## Setup
 
