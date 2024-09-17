@@ -1,3 +1,6 @@
+'''
+This is for a different architecture, incase you don't want to use lambda function and instead use a VM like EC2 instance to continuosly poll the SQS queue for messages and then on a new message, start an ECS task.
+'''
 import boto3
 import json
 import time

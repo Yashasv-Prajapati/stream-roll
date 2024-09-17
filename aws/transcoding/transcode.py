@@ -1,3 +1,6 @@
+'''
+This file will run the transcoding part, the functions are small, simple and easy to understand
+'''
 import subprocess
 import concurrent.futures
 import uuid
