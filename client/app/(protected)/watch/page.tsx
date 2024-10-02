@@ -9,7 +9,6 @@ interface VideoPageProps {
 
 const VideoPage = async ({ params }: VideoPageProps) => {
   const videoId = params.id;
-  const video = await getVideoDataById(videoId); // Replace with your actual data fetching logic
 
   const relatedVideos = [
     {
@@ -28,6 +27,10 @@ const VideoPage = async ({ params }: VideoPageProps) => {
     },
     // Add more dummy videos as needed
   ];
+
+  // const video = await getVideoDataById(videoId); // Replace with your actual data fetching logic
+  const video = relatedVideos[0]; // Replace with your actual data fetching logic
+
 
   return (
     <div className="flex flex-col items-center bg-gradient-to-r from-blue-500 to-purple-600 p-8">

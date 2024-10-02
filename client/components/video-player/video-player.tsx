@@ -11,18 +11,20 @@ export default function VideoPlayer({ src }: { src: string }) {
   useEffect(() => {
     if (videoRef.current) {
       const player = videojs(videoRef.current, {
-        sources: [
-          {
-            src: src,
-            type: "application/x-mpegURL",
-          },
-        ],
         aspectRatio: "16:9",
         response: true,
 
         enableSmoothSeeking: true,
 
         playbackRates: [0.5, 1, 1.5, 2],
+
+        sources: [
+          {
+            src: src,
+            type: "application/x-mpegURL",
+          },
+        ],
+
         controlBar: {
           skipButtons: {
             forward: 5,
@@ -49,7 +51,12 @@ export default function VideoPlayer({ src }: { src: string }) {
 
   return (
     <div>
-      <video controls ref={videoRef} className="video-js vjs-16-9 mx-auto"  playsInline />
+      <video
+        controls
+        ref={videoRef}
+        className="video-js vjs-16-9 mx-auto"
+        playsInline
+      />
     </div>
   );
 }

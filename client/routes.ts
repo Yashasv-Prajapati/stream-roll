@@ -10,11 +10,16 @@ export const publicRoutes = ["/"];
  */
 export const protectedRoutes = ["/upload", "/browse"];
 
+
+export const authRoutes = ["/login", "/signup"];
+
 /**
  * Auth API route
  * @type string
  */
-export const apiAuthPrefix = "/api/auth";
+// Prefixes for API authentication routes
+// Routes that start with any of these prefixes are used for API authentication purposes
+export const apiAuthPrefix = ['/api/auth'];
 
 /**
  * The default redirect path after just loggin in

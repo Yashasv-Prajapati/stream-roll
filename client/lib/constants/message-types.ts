@@ -1,0 +1,2 @@
+export const RETRY = 'RETRY'
+export const INVALID_CREDENTIALS = 'INVALID_CREDENTIALS'

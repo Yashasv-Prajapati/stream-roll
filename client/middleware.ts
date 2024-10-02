@@ -1,50 +1,53 @@
-import authConfig from "@/auth.config";
 import NextAuth from "next-auth";
 import {
-    apiAuthPrefix,
-    DEFAULT_LOGIN_REDIRECT_URL,
-    protectedRoutes,
-    publicRoutes,
+  apiAuthPrefix,
+  authRoutes,
+  DEFAULT_LOGIN_REDIRECT_URL,
+  protectedRoutes,
+  publicRoutes,
 } from "./routes";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-const { auth } = NextAuth(authConfig);
+export function middleware(request: NextRequest) {
+  const { nextUrl } = request;
 
-export default auth(async function middleware(req) {
-    const { nextUrl } = req;
-    const isLoggedIn = !!req.auth;
+  const isLoggedIn = request.cookies.has("userAuth");
 
-    const isApiRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isApiAuthRoute = apiAuthPrefix.some((prefix) =>
+    nextUrl.pathname.startsWith(prefix)
+  );
 
-    const isPublicRoute = publicRoutes.some((route) =>
-        nextUrl.pathname.startsWith(route)
-    );
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
-    const isProtectedRoute = protectedRoutes.some((route) =>
-        nextUrl.pathname.startsWith(route)
-    );
+  if (isApiAuthRoute) {
+    return null;
+  }
 
-    if (isApiRoute) {
-        return NextResponse.next();
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return NextResponse.redirect(
+        new URL(DEFAULT_LOGIN_REDIRECT_URL, nextUrl)
+      );
     }
 
-    if (isProtectedRoute) {
-        if (isLoggedIn) {
-            return NextResponse.redirect(
-                new URL(DEFAULT_LOGIN_REDIRECT_URL, nextUrl)
-            );
-        }
-        return NextResponse.redirect(new URL("/login", nextUrl));
-    }
+    return null;
+  }
 
-    if (!isLoggedIn && !isPublicRoute) {
-        return NextResponse.redirect(new URL("/login", nextUrl));
-    }
+  if (!isLoggedIn && !isPublicRoute) {
+    //   let callbackUrl = nextUrl.pathname;
+    //   if (nextUrl.search) {
+    //     callbackUrl += nextUrl.search;
+    //   }
 
-    return;
-});
+    //   const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
-// Optionally, don't invoke Middleware on some paths
+    return NextResponse.redirect(new URL(`signup`, nextUrl));
+  }
+
+  return null;
+}
+
 export const config = {
-    matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };

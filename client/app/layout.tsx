@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-100`}>
         <Navbar currentPath={""} isAuthenticated={isAuthenticated} />
         {children}
-        {/* <Toaster/> */}
+        <Toaster  />
         <Footer />
       </body>
     </html>

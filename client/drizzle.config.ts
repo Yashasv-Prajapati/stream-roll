@@ -7,8 +7,9 @@ export default defineConfig({
     driver:"turso",
     dialect: "sqlite",
     dbCredentials: {
-        url: process.env.DATABASE_URL!,
-        authToken: process.env.TURSO_DATABASE_SECRET_TOKEN
+        url: 'file:local.db',
+        // url: 'process.env.DATABASE_URL!',
+        // authToken: process.env.TURSO_DATABASE_SECRET_TOKEN
     },
     verbose: true,
     strict: true,

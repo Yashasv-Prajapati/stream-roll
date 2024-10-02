@@ -1,7 +1,6 @@
 import * as z from "zod";
 
 export const loginSchema = z.object({
-    loginType: z.enum(["email", "username"]),
-    user_identifier: z.string(),
+    email: z.string().email() ,
     password: z.string(),
 });

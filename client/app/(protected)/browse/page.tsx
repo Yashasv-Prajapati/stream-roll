@@ -1,7 +1,6 @@
 // import { useState } from 'react';
 // import VideoCard from '@/components/VideoCard';
 import { getVideos } from "@/actions/videos/video"; // Assuming you have a function to fetch videos from your database or API
-import { auth } from "@/auth";
 import VideoCard from "@/components/video-card";
 
 interface BrowseVideosProps {
@@ -11,7 +10,6 @@ interface BrowseVideosProps {
 
 const BrowseVideos = async ({ searchParams }: BrowseVideosProps) => {
 
-  const session = await auth();
 
   const searchTerm = searchParams?.search || "";
   const videos = await getVideos(searchTerm);
@@ -31,7 +29,7 @@ const BrowseVideos = async ({ searchParams }: BrowseVideosProps) => {
           type="submit"
           className="rounded-r-lg bg-white px-4 py-2 font-semibold text-blue-500 transition duration-300 hover:bg-gray-100"
         >
-          Search {JSON.stringify(session)}
+          Search
         </button>
       </form>
       <div className="grid w-full max-w-screen-lg grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
